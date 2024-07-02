@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #fff;
+}
+.footer {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/images.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Coloca la imagen detrás del contenido */
+}
+
+.container {
+    position: relative;
+    z-index: 1; /* Coloca el contenido sobre la imagen de fondo */
+}
+
+.heading{
+    font-size: 4rem; /* Tamaño del texto */
+    font-weight: bold; /* Peso de la fuente */
+    color: #246cb8; /* Color del texto */
+    text-align: center; /* Alineación del texto */
+}

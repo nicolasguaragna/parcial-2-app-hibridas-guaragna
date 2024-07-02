@@ -1,0 +1,436 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f0f0;
+  min-height: 100vh;  
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.peliculas-list {
+  padding: 20px;
+}
+
+.create-movie-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.create-movie-button:hover {
+  background-color: #218838;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(0, 123, 255, 0.8); 
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  color: #fff; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #002175;  
+}
+
+.card-link, .review-link {
+  display: block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  color: #0056b3;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.card-link:hover, .review-link:hover {
+  background-color: #c4482c;
+}
+
+.update-movie-button, .delete-movie-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.update-movie-button {
+  background-color: #ffc107;
+}
+
+.update-movie-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-movie-button {
+  background-color: #dc3545;
+}
+
+.delete-movie-button:hover {
+  background-color: #c82333;
+}
+
+.scrollTop {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  height: 50px;
+  width: 50px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  z-index: 1000;
+}
+
+.scrollTop:hover {
+  background-color: #0056b3;
+}
+
+.create-review-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.create-review-button:hover {
+  background-color: #0056b3;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.navbar {
+  width: 100%;  
+  background-color: #4e4e4e;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+.navbar h2 {
+  margin: 0;
+  color: white;
+  font-size: 1.2em;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+.navbar ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar ul li a:hover {
+  background-color: #575757;
+}
+
+.home-cards-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap; 
+  margin-top: 20px;
+}
+
+.home-card {
+  flex: 1;
+  background: rgba(0, 123, 255, 0.8); 
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  color: #fff; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-view-more-button {
+  background-color: #28a745;  
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.home-view-more-button:hover {
+  background-color: #218838;  
+}
+
+/* Estilos adicionales para las reseñas */
+.review-card {
+  background: rgba(0, 123, 255, 0.8); 
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #fff; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-card h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #c4482c;
+}
+
+.review-card p {
+  margin: 10px 0;
+}
+
+.review-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.update-button {
+  background-color: #ffc107;
+}
+
+.update-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.edit-form-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.edit-form-modal textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.delete-confirmation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  text-align: center;
+}
+
+.delete-confirmation-modal p {
+  margin-bottom: 20px;
+}
+
+.delete-confirmation-modal button {
+  margin: 0 10px;
+}
+
+/* Estilos para el modal de crear y actualizar */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  text-align: left;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+
+/* Añadir margen entre los botones dentro del modal */
+.modal-content button {
+  margin-right: 10px;
+}
+
+.modal-content button:last-of-type {
+  margin-right: 0;
+}
+
+/* Estilos para login y register */
+.login-container, .register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1, .register-container h1 {
+  margin-bottom: 20px;
+}
+
+.login-container form div, .register-container form div {
+  margin-bottom: 15px;
+}
+
+.login-container label, .register-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login-container input, .register-container input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container button, .register-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover, .register-container button:hover {
+  background-color: #0056b3;
+}
