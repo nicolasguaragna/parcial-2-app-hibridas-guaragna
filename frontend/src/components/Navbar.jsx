@@ -15,7 +15,6 @@ const Navbar = () => {
           {usuario && (
             <>
               <li><NavLink to="/peliculas">Películas</NavLink></li>
-              <li><NavLink to="/reviews">Reviews</NavLink></li>
             </>
           )}
           <li>

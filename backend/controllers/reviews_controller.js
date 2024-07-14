@@ -1,12 +1,12 @@
 import Review from "../models/reviews_model.js";
 
-// Obtener todas las reseñas
-const getAllReviews = async (req,res) => {
+// Obtener todas las reseñas con filtrado opcional por película
+const getAllReviews = async (query) => {
     try {
-        const reviews = await Review.find();
-        res.status(200).json(reviews);
+        const reviews = await Review.find(query); // Encuentra las reseñas que coinciden con el filtro
+        return reviews; // Devuelve las reseñas como respuesta
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        throw new Error(error.message); // Manejo de errores
     }
 };
 
@@ -42,20 +42,20 @@ const createReview = async (req, res) => {
 // Actualizar una reseña
 async function updateReview(req, res) {
     try {
-      const { id } = req.params;
-      const { pelicula, nombre, comentario, calificacion } = req.body;
-  
-      const updatedReview = await Review.findByIdAndUpdate(
-        id,
-        { pelicula, nombre, comentario, calificacion },
-        { new: true } // Esto asegura que se devuelva el documento actualizado
-      );
-  
-      res.status(200).json(updatedReview);
+        const { id } = req.params;
+        const { pelicula, nombre, comentario, calificacion } = req.body;
+
+        const updatedReview = await Review.findByIdAndUpdate(
+            id,
+            { pelicula, nombre, comentario, calificacion },
+            { new: true } // Esto asegura que se devuelva el documento actualizado
+        );
+
+        res.status(200).json(updatedReview);
     } catch (error) {
-      res.status(500).json({ message: 'Error al actualizar la reseña', error });
+        res.status(500).json({ message: 'Error al actualizar la reseña', error });
     }
-  }
+}
 
 // Eliminar una reseña
 const deleteReview = async (req, res) => {

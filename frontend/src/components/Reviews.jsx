@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { useLocation } from 'react-router-dom';
 import '../App.css';
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState([]); // Estado para almacenar las reseñas
-  const [showCreateModal, setShowCreateModal] = useState(false);// Estado para controlar la visibilidad del modal de creación
-  const [showUpdateModal, setShowUpdateModal] = useState(false);// Estado para controlar la visibilidad del modal de actualización
-  const [currentReview, setCurrentReview] = useState(null);// Estado para almacenar la reseña actual que se está editando
-  const [formData, setFormData] = useState({// Estado para los datos del formulario de creación/actualización
+  const [reviews, setReviews] = useState([]);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [currentReview, setCurrentReview] = useState(null);
+  const [formData, setFormData] = useState({
     pelicula: '',
     nombre: '',
     comentario: '',
@@ -16,10 +17,15 @@ const Reviews = () => {
   });
   const { auth } = useContext(AuthContext);
   const [showScroll, setShowScroll] = useState(false);
+  const location = useLocation();
+
+  // Extracting the movie ID from the URL
+  const params = new URLSearchParams(location.search);
+  const peliculaId = params.get('pelicula');
 
   useEffect(() => {
-    // Hago una solicitud GET para obtener las reseñas al cargar el componente
-    axios.get('http://localhost:3000/reviews', { headers: { 'Authorization': `Bearer ${auth}` } })
+    // Only fetch reviews for the specified movie
+    axios.get(`http://localhost:3000/reviews?pelicula=${peliculaId}`, { headers: { 'Authorization': `Bearer ${auth}` } })
       .then(response => {
         setReviews(response.data);
       })
@@ -27,12 +33,11 @@ const Reviews = () => {
         console.error("Hubo un error al obtener las reseñas:", error);
       });
 
-        // Agrego un event listener para manejar el scroll
     window.addEventListener('scroll', checkScrollTop);
     return () => {
-      window.removeEventListener('scroll', checkScrollTop); // Limpio el event listener al desmontar el componente
+      window.removeEventListener('scroll', checkScrollTop);
     };
-  }, [auth]);
+  }, [auth, peliculaId]);
 
   const checkScrollTop = () => {
     if (!showScroll && window.pageYOffset > 400) {
@@ -44,19 +49,12 @@ const Reviews = () => {
 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setShowScroll(false); // Ocultar el botón al hacer clic
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', checkScrollTop);
-    return () => {
-      window.removeEventListener('scroll', checkScrollTop);
-    };
-  }, [showScroll]);
-
-   // Función para mostrar el modal de creación de reseña
   const handleCreateReview = () => {
     setFormData({
-      pelicula: '',
+      pelicula: peliculaId,  // Set the movie ID in the form data
       nombre: '',
       comentario: '',
       calificacion: ''
@@ -64,7 +62,6 @@ const Reviews = () => {
     setShowCreateModal(true);
   };
 
-  // Función para mostrar el modal de actualización de reseña
   const handleUpdateReview = (review) => {
     setCurrentReview(review);
     setFormData({
@@ -76,7 +73,6 @@ const Reviews = () => {
     setShowUpdateModal(true);
   };
 
-   // Función para eliminar una reseña
   const handleDeleteReview = (id) => {
     const confirmed = window.confirm("¿Estás seguro de que quieres eliminar esta reseña?");
     if (confirmed) {
@@ -97,9 +93,6 @@ const Reviews = () => {
     });
   };
 
-
-  // Función para manejar el envío del formulario de creación
-
   const handleCreateSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:3000/reviews', formData, { headers: { 'Authorization': `Bearer ${auth}` } })
@@ -112,7 +105,6 @@ const Reviews = () => {
       });
   };
 
-  // Función para manejar el envío del formulario de actualización
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
     axios.put(`http://localhost:3000/reviews/${currentReview._id}`, formData, { headers: { 'Authorization': `Bearer ${auth}` } })
@@ -156,6 +148,7 @@ const Reviews = () => {
                 value={formData.pelicula}
                 onChange={handleInputChange}
                 required
+                readOnly
               />
               <input
                 type="text"
@@ -201,6 +194,7 @@ const Reviews = () => {
                 value={formData.pelicula}
                 onChange={handleInputChange}
                 required
+                readOnly
               />
               <input
                 type="text"

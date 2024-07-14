@@ -5,12 +5,8 @@ import { AuthContext } from '../context/AuthContext';
 import '../App.css'; 
 
 const PeliculasList = () => {
-
-   // Declaro el estado peliculas y su función de actualización setPeliculas, inicializado como un array vacío.
   const [peliculas, setPeliculas] = useState([]);
-  // Declaro el estado showCreateModal y su función de actualización setShowCreateModal, inicializado en false.
   const [showCreateModal, setShowCreateModal] = useState(false);
-  // Declaro el estado showUpdateModal y su función de actualización setShowUpdateModal, inicializado en false.
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [currentMovie, setCurrentMovie] = useState(null);
   const [formData, setFormData] = useState({
@@ -20,12 +16,10 @@ const PeliculasList = () => {
     actores: '',
     genero: ''
   });
-  // Utilizo useContext para obtener el token de autenticación del contexto AuthContext.
   const { auth } = useContext(AuthContext); 
   const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
-    // Hago una solicitud GET a la API para obtener la lista de películas, incluyendo el token en los encabezados.
     axios.get('http://localhost:3000/peliculas', { headers: { Authorization: `Bearer ${auth}` } }) 
       .then(response => {
         setPeliculas(response.data);
@@ -63,7 +57,6 @@ const PeliculasList = () => {
       genero: ''
     });
     setShowCreateModal(true);
-    // Inicializo el formulario con valores vacíos y muestro el modal para crear una nueva película.
   };
 
   const handleUpdateMovie = (pelicula) => {
@@ -76,7 +69,6 @@ const PeliculasList = () => {
       genero: pelicula.genero.join(', ')
     });
     setShowUpdateModal(true);
-    // Configuro los datos de la película actual en el formulario y muestro el modal para actualizar la película.
   };
 
   const handleDeleteMovie = (id) => {
@@ -96,7 +88,6 @@ const PeliculasList = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-        // Actualizo el estado formData con los valores ingresados en el formulario.
     });
   };
 
@@ -106,7 +97,6 @@ const PeliculasList = () => {
       .then(response => {
         setPeliculas([...peliculas, response.data]);
         setShowCreateModal(false);
-        // Si la solicitud es exitosa, agrego la nueva película al estado peliculas y oculto el modal.
       })
       .catch(error => {
         console.error("Hubo un error al crear la película:", error);
@@ -133,6 +123,7 @@ const PeliculasList = () => {
       <div className="cards-container">
         {peliculas.map(pelicula => (
           <div className="card" key={pelicula._id}>
+          
             <h2 className="card-title">{pelicula.pelicula}</h2>
             <p><strong>Año:</strong> {pelicula.año}</p>
             <p><strong>Dirección:</strong> {pelicula.direccion.join(', ')}</p>
