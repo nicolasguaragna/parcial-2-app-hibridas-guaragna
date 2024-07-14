@@ -133,7 +133,6 @@ const PeliculasList = () => {
       <div className="cards-container">
         {peliculas.map(pelicula => (
           <div className="card" key={pelicula._id}>
-            <Link className="card-link" to={`/peliculas/${pelicula._id}`}></Link>
             <h2 className="card-title">{pelicula.pelicula}</h2>
             <p><strong>Año:</strong> {pelicula.año}</p>
             <p><strong>Dirección:</strong> {pelicula.direccion.join(', ')}</p>
