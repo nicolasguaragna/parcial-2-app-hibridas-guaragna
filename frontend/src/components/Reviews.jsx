@@ -46,6 +46,13 @@ const Reviews = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    window.addEventListener('scroll', checkScrollTop);
+    return () => {
+      window.removeEventListener('scroll', checkScrollTop);
+    };
+  }, [showScroll]);
+
    // Función para mostrar el modal de creación de reseña
   const handleCreateReview = () => {
     setFormData({
