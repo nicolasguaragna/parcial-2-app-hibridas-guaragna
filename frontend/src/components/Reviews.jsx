@@ -18,12 +18,22 @@ const Reviews = () => {
   const { auth } = useContext(AuthContext);
   const [showScroll, setShowScroll] = useState(false);
   const location = useLocation();
+  const [pelicula, setPelicula] = useState('');
 
   // Extracting the movie ID from the URL
   const params = new URLSearchParams(location.search);
   const peliculaId = params.get('pelicula');
 
   useEffect(() => {
+    // Fetch the movie details
+    axios.get(`http://localhost:3000/peliculas/${peliculaId}`, { headers: { 'Authorization': `Bearer ${auth}` } })
+      .then(response => {
+        setPelicula(response.data.pelicula);
+      })
+      .catch(error => {
+        console.error("Hubo un error al obtener los detalles de la película:", error);
+      });
+
     // Only fetch reviews for the specified movie
     axios.get(`http://localhost:3000/reviews?pelicula=${peliculaId}`, { headers: { 'Authorization': `Bearer ${auth}` } })
       .then(response => {
@@ -49,7 +59,6 @@ const Reviews = () => {
 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setShowScroll(false); // Ocultar el botón al hacer clic
   };
 
   const handleCreateReview = () => {
@@ -120,12 +129,12 @@ const Reviews = () => {
 
   return (
     <div>
-      <h1>Lista de Reseñas</h1>
+      <h1>Lista de Reseñas de {pelicula}</h1>
       <button className="create-review-button" onClick={handleCreateReview}>Crear Nueva Reseña</button>
       <div className="cards-container">
         {reviews.map(review => (
           <div className="card" key={review._id}>
-            <h2 className="card-title">{review.pelicula}</h2>
+            <h2 className="card-title">{pelicula}</h2>
             <p><strong>Usuario:</strong> {review.nombre}</p>
             <p><strong>Comentario:</strong> {review.comentario}</p>
             <p><strong>Calificación:</strong> {review.calificacion}</p>
